@@ -12,10 +12,10 @@ iface {{ lxc_net_bridge }} inet static
 {% endif -%}
 {%- if lxc_net_nat | bool %}
     # dnsmasq start and stop
-    post-up /usr/local/bin/lxc-system-manage dnsmasq-start || true
     post-up /usr/local/bin/lxc-system-manage iptables-create
-    post-down /usr/local/bin/lxc-system-manage dnsmasq-stop
+    post-up /usr/local/bin/lxc-system-manage dnsmasq-start || true
     post-down /usr/local/bin/lxc-system-manage iptables-remove
+    post-down /usr/local/bin/lxc-system-manage dnsmasq-stop
 {% endif -%}
     bridge_fd 0
     bridge_maxwait 0
